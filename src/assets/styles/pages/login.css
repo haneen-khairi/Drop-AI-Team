@@ -122,3 +122,22 @@ code {
 .rs-panel-title{
   color:#000;
 }
+.card .form-group svg{
+  position: relative;
+  z-index: 999;
+}
+.card .form-group svg {
+  position: relative;
+  z-index: 999;
+  top: -34px;
+  float: right;
+  right: 15px;
+}
+.rs-checkbox-wrapper {
+  display: inline-block;
+  height: 16px;
+  left: 10px;
+  position: absolute;
+  top: 20px !important;
+  width: 16px;
+}

@@ -24,7 +24,7 @@ const CustomNavbar: React.FC<React.ComponentProps<typeof Navbar>> = () => {
                 <Link className='nav-item' to={`/wishlist`}>Wishlist</Link>
                 <Link className='nav-item' to={`/bestseller`}>Ask AI</Link>
                 <Link className='nav-item' to={`/social-search`}>Social Search</Link>
-                <Link className='nav-item btn btn-primary' to={`/login`}>Sign up</Link>
+                <Link className='nav-item btn btn-primary' to={`/signup`}>Sign up</Link>
             </ul>
         </nav>
     );

@@ -2,6 +2,7 @@ import React from 'react';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import Home from './pages/Home';
 import Login from './pages/Login';
+import Signup from './pages/Signup';
 import Search from './pages/Search';
 import Profile from './pages/Profile';
 import ProfilePassword from './pages/ProfilePassword';
@@ -29,6 +30,7 @@ const App: React.FC = () => {
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/login" element={<Login />} />
+          <Route path="/signup" element={<Signup />} />
           <Route path="/profile" element={<Profile />} />
           <Route path="/profilePassword" element={<ProfilePassword />} />
           <Route path="/profileMypages" element={<ProgileMypages />} />
