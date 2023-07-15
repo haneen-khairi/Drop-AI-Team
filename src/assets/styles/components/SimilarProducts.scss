@@ -1,0 +1,36 @@
+.simiItemLists {
+  gap: 14px;
+  display: flex;
+
+  .itemsList {
+    max-height: 395px;
+    overflow-y: auto;
+  }
+}
+
+
+.similar-products-card {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 18px;
+  margin-bottom: 14px;
+  box-shadow: 1px 1px 1px #ddd;
+  border-radius: 8px;
+  position: relative;
+  height: 65px;
+
+  &>div {
+    flex: 1;
+  }
+
+  &::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 3px;
+    background-color: $primary;
+  }
+}

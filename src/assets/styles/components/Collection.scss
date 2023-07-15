@@ -1,0 +1,44 @@
+.collection {
+    width: 100%;
+    justify-content: center;
+    align-items: stretch;
+    padding: 48px;
+    gap: 20px;
+
+    &:nth-child(even) {
+        background-color: #F3F3F3;
+    }
+
+    .flex-col-container {
+        display: flex;
+        flex-direction: column;
+        gap: 20px;
+
+
+        .collection-header {
+
+            .collection-tag {
+                display: flex;
+                align-items: center;
+                gap: 12px;
+            }
+
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            justify-content: space-between;
+
+            .collection-title {
+                font-size: 20px;
+            }
+        }
+    }
+
+}
+
+.collection-items {
+    // width: 100%;
+    justify-content: center;
+    align-items: stretch;
+    gap: 20px;
+}

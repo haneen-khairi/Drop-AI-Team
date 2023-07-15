@@ -1,0 +1,278 @@
+.profile-img-card {
+    width: 96px;
+    height: 96px;
+    margin: 0 auto 10px;
+    display: block;
+    -moz-border-radius: 50%;
+    -webkit-border-radius: 50%;
+    border-radius: 50%;
+  }
+  button.btn.btn-primary.loginbtn {
+    width: 100%;
+    margin-top: 20px;
+    background-color: #8C5CB3;
+    color: #fff;
+    border: none;
+}
+a.profile.btn.btn-primary {
+  border-radius: 30px;
+  background: #8C5CB3;
+  display: flex;
+  width: 252px;
+  padding: 6px;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  border: none;
+}
+a.profile.btn.btn-primary:hover {
+  border-radius: 30px;
+  background: #fff;
+  text-decoration: none;
+ color: #8C5CB3;
+  border: 1px solid #8C5CB3;
+}
+ 
+.sidebar a.nav-link {
+  color: #8C5CB3;
+ 
+font-size: 17px;
+font-style: normal;
+font-weight: 500;
+line-height: normal;
+}
+.sidebar a.nav-link.Logout {
+  color:#C6322A !important;
+  padding-top: 200px;
+}
+.sidebar{
+  border-right: 2px solid #c7a8e2a4;
+  width: 200px;
+  height: 857px;
+}
+.sidebar li.active{
+  border-right: 4px solid #8C5CB3;
+  border-radius: 2px 0px 0px 2px;
+}
+ 
+.sidebar img.iconsidebar {
+  padding-right: 10px;
+  margin-top: -6px;
+}
+.kt_app_sidebar{
+  position: fixed;
+  z-index: 105;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  margin-top: 100px;
+  padding-left: 70px;
+}
+.app-container {
+  padding-left: 197px !important;
+}
+
+.app-container input {
+    border-radius: 6px;
+border: 1px solid #A4A4A4;
+width: 463px;
+height: 46px;
+flex-shrink: 0;
+}
+.app-container button.btn.btn-primary.loginbtn {
+    border-radius: 8px;
+    background: #8C5CB3;
+    display: flex;
+width: 300px;
+padding: 12px 36px;
+justify-content: center;
+align-items: center;
+gap: 10px;
+}
+.app-container form {
+  padding-top: 50px;
+}
+body{
+    background: #fff ;
+}
+header{
+    background: rgba(242, 237, 247, 0.80) !important;
+}
+img.iconsidebar {
+    padding-right: 8px;
+    height: 27px;
+}
+button.btn.btn-primary.loginbtn.addlink {
+   
+    margin-top: 300px;
+}
+/* Popup overlay styles */
+.popup-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    z-index: 999;
+  }
+  
+  /* Popup content styles */
+  .popup {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+    z-index: 1000;
+  }
+  
+  /* Popup overlay styles */
+.popup-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+ 
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 888;
+  }
+  
+  /* Popup content styles */
+  .popup {
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+  }
+  .popup-content {
+    background: #fff !important;
+    z-index: 999;
+    height: auto;
+    height: auto;
+    padding: 45px;
+    border-radius: 10px;
+}
+form.page{
+    padding-top: 1px !important;
+  }
+form.page button.btn.btn-primary.add{
+  display: flex;
+  width: 130px;
+  height: 36px;
+  padding: 10px;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  border-radius: 6px;
+background: #8C5CB3;
+border: none;
+ margin-top: 20px;
+text-align: center;
+  }
+/* form.page button.btn.btn-primary.Cancel{
+  color: #000;
+  background: none;
+  border: none;
+font-size: 16px;
+font-style: normal;
+font-weight: 400;
+line-height: normal;
+  } */
+  button.close-btn.btn.btn-primary.Cancel{
+    color: #000;
+    background: none;
+    display: inline-block;
+    border: none;
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+ 
+  
+    float: right;
+    margin-top: -34px;
+  }
+  form.page label{
+    color: #000;
+font-family: Poppins;
+font-size: 17px;
+font-style: normal;
+font-weight: 500;
+line-height: normal;
+margin-bottom: 5px;
+  }
+  form.page input{
+    border-radius: 6px;
+    border: 1px solid #A4A4A4;
+  }
+  form.page textarea{
+    border-radius: 6px;
+    border: 1px solid #A4A4A4;
+  }
+  h1.link {
+    color: #000;
+    font-size: 18px;
+font-style: normal;
+font-weight: 500;
+line-height: normal;
+padding-top: 40px;
+display: inline-block;
+  }
+  .app-container .header{
+    display: inline-block;
+  }
+  h3.links {
+    color: #000;
+font-family: Poppins;
+font-size: 16px;
+font-style: normal;
+font-weight: 400;
+line-height: normal;
+  }
+  p.alllink {
+    color: #3F33A9;
+font-family: Poppins;
+font-size: 16px;
+font-style: normal;
+font-weight: 400;
+line-height: normal;
+  }
+  .form-group.links {
+    margin-top: 31px;
+    float: right;
+    display: flex;
+  }
+  .form-group.links input{
+    border-radius: 25px;
+    background: #F2F2F2;
+    display: flex;
+width: 390px;
+padding: 10px 15px;
+align-items: flex-start;
+gap: 10px;
+  }
+  .links {
+    margin-top: 45px;
+}
+button.btn.btn-primary.sort {
+
+width: 101px;
+padding: 10px 10px 10px 10px ;
+align-items: flex-start;
+ margin-left: 10px;
+border-radius: 25px;
+background: #8C5CB3;
+color: #fff;
+text-align: center;
+border: none;
+}
+button.btn.btn-primary.loginbtn.addlink.links {
+  margin-top: 50px;
+}

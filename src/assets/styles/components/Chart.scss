@@ -1,0 +1,62 @@
+.chart-section {
+    display: flex;
+    flex-direction: column;
+    padding: 16px;
+    padding-bottom: 0;
+    gap: 12px;
+
+    box-sizing: border-box;
+    border: 1px solid rgba(214, 214, 214, 0.5);
+    box-shadow: 0px 4px 4px rgba(163, 163, 163, 0.25), 4px 16px 16px rgba(163, 163, 163, 0.16);
+    border-radius: 15px;
+
+    .chart-title {
+        font-weight: 500;
+        font-size: 18px;
+        color: black;
+    }
+
+    .chart-ctrls {
+        display: flex;
+        width: 100%;
+        border-radius: 8px;
+        border: 1px solid #A9A9A9;
+        padding: 6px;
+        align-items: center;
+        justify-content: space-between;
+        gap: 4px;
+        font-weight: 500;
+
+        .chart-btn {
+            width: 100%;
+            background: transparent;
+            padding: 6px 3px;
+            border-radius: 6px;
+
+            &.active {
+                background: rgba(234, 208, 255, 0.80);
+            }
+        }
+    }
+
+    .chart-placeholder,
+    .no-chart-placeholder {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width: 450px;
+        height: 350px;
+        border: 2px solid gray;
+        border-radius: 6px;
+        margin: 8px 0 16px 0;
+
+        &.no-chart-placeholder {
+            height: 390px;
+        }
+    }
+
+
+    .xaxis-labels {
+        font-weight: 600;
+    }
+}

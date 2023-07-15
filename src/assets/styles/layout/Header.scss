@@ -1,0 +1,86 @@
+.home-header,
+.search-header {
+    display: flex;
+    position: relative;
+    width: 100%;
+    justify-content: space-between;
+    padding: 30px 80px;
+    font-size: 18px;
+    font-weight: 500;
+
+    .bg-effect {
+        position: absolute;
+        width: 100%;
+        opacity: 0.1;
+
+        .blob-one {
+            position: absolute;
+            background: #055BDC;
+            filter: blur(223.717px);
+            transform: matrix(0.36, 0.93, -0.76, 0.65, 0, 0) translate(-80%, 0);
+            height: 510px;
+            width: 573px;
+            left: 50%;
+            top: 46.9%;
+        }
+
+        .blob-two {
+            position: absolute;
+            background: #1B1436;
+            filter: blur(255.329px);
+            transform: matrix(0.36, 0.93, -0.76, 0.65, 0, 0) translate(-90%, 0);
+            height: 510px;
+            width: 573px;
+            left: 35%;
+            top: 31%;
+        }
+
+        .blob-three {
+            position: absolute;
+            background: #130A76;
+            filter: blur(199.4px);
+            transform: matrix(0.36, 0.93, -0.76, 0.65, 0, 0) translate(-140%, -22%);
+            height: 510px;
+            width: 573px;
+            left: 45%;
+            top: 0%;
+        }
+
+    }
+
+    .logo {
+        width: 70px;
+        height: 30px;
+    }
+
+    .nav-bar {
+        .nav-list {
+            display: flex;
+            list-style: none;
+            gap: 40px;
+            justify-content: space-around;
+            align-items: center;
+            margin: 0;
+            padding: 0;
+
+            .nav-item {
+                // padding: 0 !important;
+                // &:first-child {
+                //     color: $primary;
+                // }
+                text-decoration: none;
+                color: #575757;
+                z-index: 5;
+
+                &:hover {
+                    color: mix($primary, #575757, 50%);
+                }
+            }
+        }
+    }
+}
+
+.search-header {
+    background: rgba(242, 237, 247, 0.8);
+    margin-bottom: 72px;
+}

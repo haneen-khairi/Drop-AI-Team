@@ -1,0 +1,103 @@
+.search-content {
+    gap: 40px;
+    padding: 0 100px;
+    padding-bottom: 40px;
+
+    .filter-stack {
+        width: fit-content;
+        align-items: unset;
+
+
+
+        .filter-txt-form {
+            flex-grow: unset;
+
+            @media screen and (max-width: 676px) {
+                align-self: unset !important;
+            }
+
+            .rs-stack-item {
+                flex-grow: unset !important;
+            }
+
+            .filter-input {
+                width: 400px;
+                flex-grow: unset;
+
+                @media screen and (max-width: 676px) {
+                    width: auto;
+                    max-width: 400px;
+                }
+            }
+        }
+    }
+
+    .search-grid {
+        max-width: 75%;
+        width: fit-content;
+        height: fit-content;
+        flex-grow: 1;
+        display: grid;
+        grid-template-columns: 1fr 1fr 1fr;
+        gap: 20px;
+        justify-content: space-between;
+        align-items: stretch;
+
+        @media screen and (max-width: 1300px) {
+            grid-template-columns: 1fr 1fr;
+        }
+    }
+
+    .search-flex {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 20px;
+        justify-content: space-around;
+    }
+}
+
+.social-stack {
+    max-width: 615px;
+    margin: auto;
+
+    .filter-input {
+        height: 50px;
+    }
+
+    .filter-btn {
+        height: 50px;
+    }
+
+    .search-radio {
+
+        .rs-radio-tile {
+            width: 120px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            border-radius: 20px;
+
+            // &:hover {
+            //     border-color: lighten($color: $primary, $amount: 30%);
+            // }
+        }
+
+        .rs-radio-tile-checked {
+            border-color: $primary;
+            background-color: $primary;
+
+            &:hover {
+                border-color: $primary;
+            }
+
+            .rs-radio-tile-content {
+                color: white;
+            }
+        }
+
+        .rs-radio-tile-mark,
+        .rs-radio-tile-icon {
+            display: none;
+        }
+    }
+}

@@ -1,0 +1,17 @@
+.paginator {
+    justify-content: center;
+
+    .rs-pagination-btn-active {
+        border-color: $primary;
+        background: $primary;
+        color: white;
+
+        &:hover,
+        &:active,
+        &:focus {
+            border: none !important;
+            background: $primary !important;
+            color: white !important;
+        }
+    }
+}

@@ -1,0 +1,220 @@
+.product-card {
+    width: 265px;
+    min-height: 375px;
+    border-radius: 4px;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    background-color: #FAFAFA;
+    border: none;
+    position: relative;
+
+    .product-image {
+        width: 265px;
+        height: 180px;
+        object-fit: cover;
+    }
+
+    .product-details {
+        display: flex;
+        flex-direction: column;
+        gap: 8px;
+        padding: 12px;
+        flex-grow: 1;
+
+        .line-one {
+            display: flex;
+            color: black;
+            font-weight: 500;
+            justify-content: space-between;
+            min-height: 40px;
+            // align-items: center;
+
+            .product-name {
+                display: -webkit-box;
+                -webkit-line-clamp: 3;
+                -webkit-box-orient: vertical;
+                overflow: hidden;
+                text-overflow: ellipsis;
+            }
+
+            .product-source-img {
+                height: 30px;
+                max-width: 30px;
+                border-radius: 4px;
+            }
+        }
+
+        .line-two {
+            display: flex;
+            justify-content: space-between;
+            color: black;
+
+            .rating {
+                margin: 0;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                gap: 4px;
+                display: none;
+            }
+        }
+
+        .line-three {
+            color: #6D6D6D;
+        }
+
+    }
+
+    .go-btn {
+        margin: 0 12px 12px 12px;
+    }
+
+    .fav-btn {
+        position: absolute;
+        top: 15px;
+        right: 15px;
+        box-shadow: 0px 8px 14px rgba(136, 136, 136, 0.25);
+    }
+
+}
+
+.sm-product-card {
+    border-radius: 4px;
+    overflow: hidden;
+    display: flex;
+    border: none;
+    position: relative;
+
+    .product-image {
+        width: 100px;
+        height: 100px;
+        object-fit: cover;
+    }
+
+    .product-details {
+        display: flex;
+        flex-direction: column;
+        padding: 4px 12px;
+        width: calc(100% - 100px);
+
+        .product-name {
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            font-weight: 400;
+            font-size: 16px !important;
+        }
+
+        .line-one {
+            display: flex;
+            color: black;
+            font-weight: 400;
+            font-size: 12px;
+            gap: 4px;
+
+            p {
+                font-weight: 400;
+                font-size: 14px !important;
+            }
+
+            .product-source-img {
+                height: 25px;
+                max-width: 25px;
+                border-radius: 4px;
+            }
+        }
+
+        .line-two {
+            display: flex;
+            justify-content: space-between;
+            color: black;
+
+            p {
+                font-weight: 400;
+                font-size: 12px !important;
+            }
+
+        }
+
+        .line-three {
+            color: #6D6D6D;
+
+            .go-btn {
+                width: 100%;
+            }
+        }
+
+    }
+}
+
+
+
+.details-card {
+    border: none;
+    flex-direction: row;
+
+    .product-image {
+        width: 300px;
+        height: 370px;
+        border-radius: 12px;
+        object-fit: cover;
+    }
+
+    .product-details {
+        padding: 24px;
+        max-width: 515px;
+        display: flex;
+        flex-direction: column;
+        gap: 8px;
+        flex-grow: 1;
+
+
+        .line-one {
+            display: flex;
+            color: black;
+            font-weight: 500;
+            justify-content: space-between;
+            min-height: 40px;
+            font-size: 18px;
+            gap: 12px;
+            // align-items: center;
+
+            .product-name {}
+
+            .product-source-img {
+                height: 30px;
+                max-width: 30px;
+                border-radius: 4px;
+            }
+        }
+
+        .line-two {
+            display: flex;
+            justify-content: space-evenly;
+            color: black;
+            gap: 8px;
+            padding: 8px;
+            flex-wrap: wrap;
+
+            .state-item {
+                margin: 0;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                gap: 4px;
+                font-size: 14px;
+                font-weight: 500;
+
+                .symbol {
+                    width: 30px;
+                    height: 30px;
+                }
+            }
+        }
+
+        .line-three {
+            color: #6D6D6D;
+        }
+    }
+}
