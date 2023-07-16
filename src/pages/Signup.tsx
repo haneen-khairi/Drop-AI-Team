@@ -9,7 +9,7 @@ const Signup: React.FC = () => {
 
     return (
         <div className="col-md-12">
-            <div className="card card-container">
+            <div className="card card-bgwhite card-bgwhite-container">
                 <div className="titel">
                     <h1>Logo</h1>
                     <h3>Sign up</h3>

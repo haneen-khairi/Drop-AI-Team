@@ -12,26 +12,21 @@ const ShowFactory: React.FC = () => {
   const [data, setData] = useState([]);
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const location = useLocation();
-  const { productName } = useParams<{ productName: string }>();
-  
-  useEffect(() => {
-    if (productName) {
-      handleFilter(productName);
-    }
-  }, [productName]);
-  
-  const handleFilter = async (productName: string) => {
+  const searchParams = new URLSearchParams(location.search);
+  const name = searchParams.get('name');
+    
+  const handleFilter = async (name: string) => {
     setIsLoading(true);
     try {
-      const response = await axios.get(`${baseApiURL}items/google_bard/?question=item_manufactory&item=${productName}`);
+      const response = await axios.get(`${baseApiURL}items/google_bard/?question=item_manufactory&item=${name}`);
       setData(response.data.products);
       setIsLoading(false);
     } catch (error) {
       console.log(error);
     }
   };
- 
-  console.log({ productName });
+
+
   
   return (
     <>

@@ -44,8 +44,9 @@
         display: flex;
         justify-content: center;
         align-items: center;
-        width: 450px;
+        width: fit-content;
         height: 350px;
+        padding:10px;
         border: 2px solid gray;
         border-radius: 6px;
         margin: 8px 0 16px 0;
