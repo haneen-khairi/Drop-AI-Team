@@ -1,16 +1,15 @@
-
 import Header from "../components/Header";
-import React from "react";
+import React, { useState } from "react";
 import { Link, useNavigate, useParams } from "react-router-dom";
 import { Col, Container, Divider, FlexboxGrid, Row } from "rsuite";
-import { Button } from "rsuite";
+import { Button, Table, Modal } from 'rsuite';
 
 import {
   PriceLocation,
   ProductDetails as ProductDetailsType,
   SimilarProducts,
-
 } from 'utils/types';
+
 import amazonLogo from '../assets/img/Amazon_icon.png';
 import aliLogo from '../assets/img/aliE_icon.png';
 import cjLogo from '../assets/img/cj_icon.png';
@@ -27,13 +26,12 @@ import min from '../assets/img/min.svg';
 import max from '../assets/img/max.svg';
 import website from '../assets/img/website.svg';
 import graph_PH from '../assets/img/graph_PH.svg';
-import MiniChart from '../components/MiniChart'; 
-
+import MiniChart from '../components/MiniChart';
+import axios from "axios";
 
 interface DataPoints {
   [key: string]: number | null;
 }
-
 
 const ProductDetails: React.FC = () => {
   const navigate = useNavigate();
@@ -74,7 +72,7 @@ const ProductDetails: React.FC = () => {
       data && data.table?.length > 0
         ? data.table.reduce((acc, entry) => {
           const [key, val] = Object.entries(entry)[0];
-          acc[key] = val != "" && val != null ? Number(val) : null;
+          acc[key] = val !== "" && val !== null ? Number(val) : null;
 
           return acc;
         }, {} as { [key: string]: number | null })
@@ -83,17 +81,19 @@ const ProductDetails: React.FC = () => {
   };
 
   const noChartPlaceHolder = () => {
-    return <>
-      <div className='chart-section'>
-        <p className='chart-title'>Price History</p>
+    return (
+      <>
+        <div className='chart-section'>
+          <p className='chart-title'>Price History</p>
 
-        <div className='no-chart-placeholder'>
-          No Valid Data For Chart
+          <div className='no-chart-placeholder'>
+            No Valid Data For Chart
+          </div>
         </div>
-      </div>
 
-    </>
-  }
+      </>
+    );
+  };
 
   if (dataLoading) {
     return (
@@ -116,10 +116,33 @@ const ProductDetails: React.FC = () => {
       </>
     );
   }
-  
 
-  const handleFilterChange = (productName: string) => {
-    navigate('/showfactory', { state: { item: productName } });
+  const [open, setOpen] = React.useState(false);
+  const [rows, setRows] = React.useState(0);
+  const handleOpen = () => setOpen(true);
+  const handleClose = () => setOpen(false);
+
+  const handleEntered = () => {
+    setTimeout(() => setRows(80), 2000);
+  };
+  const [popupData, setPopupData] = useState<PriceLocation[]>([]);
+
+  const handleShowFactories = async () => {
+    try {
+      const apiUrl = `https://dropshipping-app-ingsl.ondigitalocean.app/items/google_bard/?question=item_manufactory&item=${data.name}`;
+  
+      // Fetch the data for the popup table using your API
+      const response = await axios.get(apiUrl);
+  
+      // Set the popup data in the state
+      setPopupData(response.data);
+  
+      // Show the popup
+      setOpen(true);
+    } catch (error) {
+      // Handle any errors
+      console.error('Error fetching popup data:', error);
+    }
   };
   
 
@@ -223,23 +246,68 @@ const ProductDetails: React.FC = () => {
                 )}
               </div>
               <div className="line-two">
-              <Link to={`/showfactory`}> 
-              <Button
-                size="lg"
-                color="violet" 
-                className="filter-btn go-btn"
-                appearance="primary"
-                onClick={() => handleFilterChange(data.name)}
-                >Show Factory</Button>
+              
+                  <Button
+                    size="lg"
+                    color="violet"
+                    className="filter-btn go-btn"
+                    appearance="primary"
+                    onClick={handleOpen}
+                  >
+                    Show Factories
+                  </Button> 
+
+
+                <Modal
+                  open={open}
+                  onClose={handleClose}
+                  onEntered={handleEntered}
+                  onExited={() => {
+                    setRows(0);
+                  }}
+                >
+                  <Modal.Header>
+                    <Modal.Title>Factories</Modal.Title>
+                  </Modal.Header>
+                  <Modal.Body>
+                    <Table
+                      data={popupData}
+                      autoHeight
+                      cellBordered
+                      virtualized
+                      height={400}
+                    >
+                      <Table.Column width={100} align="center">
+                        <Table.HeaderCell>Factory Name</Table.HeaderCell>
+                        <Table.Cell dataKey="Name_Site" />
+                      </Table.Column>
+                      <Table.Column width={100} align="center">
+                        <Table.HeaderCell>Price</Table.HeaderCell>
+                        <Table.Cell dataKey="Price" />
+                      </Table.Column>
+
+                    </Table>
+                  </Modal.Body>
+                  <Modal.Footer>
+                    <Button onClick={handleClose} appearance="primary">
+                      Ok
+                    </Button>
+                    <Button onClick={handleClose} appearance="subtle">
+                      Cancel
+                    </Button>
+                  </Modal.Footer>
+                </Modal>
+
+
+
+                <Link to={`/showcountry`}>
+                  <Button
+                    size="lg"
+                    color="violet"
+                    className="filter-btn go-btn"
+                    appearance="primary"
+                  >Show Country</Button>
                 </Link>
-              <Link to={`/showcountry`}> 
-              <Button
-               size="lg"
-               color="violet"
-               className="filter-btn go-btn"
-               appearance="primary"
-               >Show Country</Button>
-               </Link>
               </div>
             </div>
           </div>

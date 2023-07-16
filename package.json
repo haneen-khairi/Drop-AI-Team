@@ -20,9 +20,10 @@
     "react-apexcharts": "^1.4.0",
     "react-bootstrap": "^2.7.4",
     "react-dom": "^18.2.0",
+    "react-query": "^3.39.3",
     "react-router-dom": "^6.12.1",
     "react-scripts": "5.0.1",
-    "rsuite": "^5.35.1",
+    "rsuite": "^5.37.0",
     "typescript": "^4.4.2",
     "web-vitals": "^2.1.0"
   },
