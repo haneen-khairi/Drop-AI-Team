@@ -181,3 +181,6 @@ export interface NLPChart {
   no_comments: number;
   link: string;
 }
+export interface LoginFormProps {
+  onLoginSuccess: (token: string) => void;
+}

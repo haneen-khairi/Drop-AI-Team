@@ -7,7 +7,7 @@ label {
   }
   
   .card-container.card {
-    width: 401px;
+    width: fit-content;
     height: fit-content;
     flex-shrink: 0;
     

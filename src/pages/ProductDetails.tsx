@@ -127,7 +127,7 @@ const ProductDetails: React.FC = () => {
     <>
       <Header className="search-header" />
       <Container className="search-content">
-        <FlexboxGrid className="details-main-content">
+        <FlexboxGrid className="details-main-content2">
           <div className="card details-card">
             <img
               src={data.image_url}
