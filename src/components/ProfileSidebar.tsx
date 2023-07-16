@@ -4,9 +4,15 @@ import settings from '../assets/img/profile/user-Regular.svg';
 import password from '../assets/img/profile/lock-Regular.svg';
 import pages from '../assets/img/profile/mypage.svg';
 import logout from '../assets/img/profile/logout.svg';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 
 const Sidebar: React.FC = () => {
+  const navigate = useNavigate();
+
+  function onLogout(){
+    localStorage.removeItem('token')
+    navigate('/')
+  }
   return (
      
     
@@ -34,10 +40,10 @@ const Sidebar: React.FC = () => {
           </Link>
         </li>
         <li className="nav-item">
-          <Link to="/" className="nav-link Logout">
+          <button onClick={onLogout}  className="nav-link Logout">
           <img src={logout} className="iconsidebar"   alt="logout" />
           Log out
-          </Link>
+          </button>
         </li>
       </ul>
    

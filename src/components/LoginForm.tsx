@@ -31,8 +31,9 @@ const LoginForm: React.FC<LoginFormProps> = ({ onLoginSuccess }) => {
         if (responseData.data && responseData.data.access) {
           // Login successful
           const token = responseData.data.access;
+          localStorage.setItem(`token`,token)
           onLoginSuccess(token);
-          window.location.href = `/?phone=${mobile_number}`;
+          window.location.href = `/`;
         } else {
           // Login failed
           setError('Invalid mobile_number or password');

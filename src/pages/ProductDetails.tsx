@@ -209,7 +209,7 @@ const ProductDetails: React.FC = () => {
                 )}
               </div>
               <div className="line-two">
-              <Link to={`/showfactory?${data.name}`}>
+              <Link to={`/showfactory?productName=${data.name}`}>
                   <Button
                     size="lg"
                     color="violet"
@@ -217,7 +217,7 @@ const ProductDetails: React.FC = () => {
                     appearance="primary"
                   >Show Factories</Button>
                 </Link>
-              <Link to={`/showcountry`}>
+              <Link to={`/showcountry?productName=${data.name}`}>
                   <Button
                     size="lg"
                     color="violet"

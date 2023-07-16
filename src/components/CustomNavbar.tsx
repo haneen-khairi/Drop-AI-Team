@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { Navbar } from 'rsuite';
 import { Link } from 'react-router-dom';
 
@@ -8,6 +8,17 @@ import { Link } from 'react-router-dom';
 // }
 
 const CustomNavbar: React.FC<React.ComponentProps<typeof Navbar>> = () => {
+    const [isLogined, setIsLogined] = useState(false)
+    useEffect(() => {
+        const token = localStorage.getItem('token')
+        if(token){
+            setIsLogined(true)
+        }else{
+            setIsLogined(false)
+
+        }
+
+    }, [])
     return (
         // <Navbar {...props}>
         //     <Nav onSelect={onSelectNav} activeKey={activeKey}>
@@ -24,7 +35,7 @@ const CustomNavbar: React.FC<React.ComponentProps<typeof Navbar>> = () => {
                 <Link className='nav-item' to={`/wishlist`}>Wishlist</Link>
                 <Link className='nav-item' to={`/bestseller`}>Ask AI</Link>
                 <Link className='nav-item' to={`/social-search`}>Social Search</Link>
-                <Link className='nav-item btn btn-primary' to={`/signup`}>Sign up</Link>
+                {!isLogined ?  <Link className='nav-item btn btn-primary' to={`/signup`}>Sign up</Link> : <Link className='nav-item btn btn-primary' to={`/profile`}>Profile</Link> }
             </ul>
         </nav>
     );
