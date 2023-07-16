@@ -19,18 +19,13 @@ const ProfileLinks: React.FC = () => {
 
     return (
         <div>
-            <HeaderProfile />
-
-
+            <HeaderProfile /> 
             <ProfileSidebar />
-            <div className="container contect app-container">
-
+            <div className="container contect app-container"> 
                 <h1 className="link">Links</h1>
-                <div className="form-group links">
-
+                <div className="form-group links"> 
                     <input
-                        type="text"
-
+                        type="text" 
                         placeholder="Search"
                         className="form-control search"
                     />
