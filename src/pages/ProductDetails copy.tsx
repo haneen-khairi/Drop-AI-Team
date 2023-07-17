@@ -323,7 +323,7 @@ const ProductDetails: React.FC = () => {
           </div>
 
           {dataLoading ? <>loading...</> : data && data.table?.length > 0 ?
-            <MiniChart chartData={formatDataForChart()} />
+            <MiniChart chartData={formatDataForChart()} prices={'ss'} />
             : noChartPlaceHolder()}
           {/* <img src={graph_PH} alt="" /> */}
         </FlexboxGrid>

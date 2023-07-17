@@ -1,5 +1,5 @@
 import Header from "../components/Header";
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { Link, useParams } from "react-router-dom";
 import { Col, Container, Divider, FlexboxGrid, Row } from "rsuite";
 import { Button } from "rsuite";
@@ -24,12 +24,17 @@ import min from "../assets/img/min.svg";
 import max from "../assets/img/max.svg";
 import website from "../assets/img/website.svg";
 import MiniChart from "../components/MiniChart";
+import axios from "axios";
 
 interface DataPoints {
   [key: string]: number | null;
 }
-
+interface OldPrice {
+  date: string;
+  price: any;
+}
 const ProductDetails: React.FC = () => {
+  const [prices, setPrices] = useState<any>()
   const { id } = useParams<{ id: string }>();
   const {
     data,
@@ -38,7 +43,22 @@ const ProductDetails: React.FC = () => {
   } = useQuery<ProductDetailsType, Error>(["ai-suggestions", id], () =>
     fetchProductDetails(id || '')
   );
-
+  async function getPrices(name:string){
+    await axios.get(`https://dropshipping-app-ingsl.ondigitalocean.app/items/google_bard/?question=item_history&item=${name}`).then((data) => {
+      console.log(data.data.prices)
+      const prices = data.data.prices;
+      const pricesArray = Object.keys(prices).map(key => {
+        return {
+          date: key,
+          price: prices[key]
+        };
+      });
+      console.log(pricesArray)
+      setPrices(pricesArray)
+    }).catch((error) => {
+      console.log(error)
+    })
+  } 
   // api
   const {
     data: dataSimilarProducts,
@@ -86,7 +106,14 @@ const ProductDetails: React.FC = () => {
 
     </>
   }
-
+  useEffect(() => {
+    if(data?.name === undefined){
+      return;
+    }
+    getPrices(data?.name)
+    console.log('name of produxxt', data?.name)
+  }, [data?.name])
+  
   if (dataLoading) {
     return (
       <>
@@ -229,8 +256,8 @@ const ProductDetails: React.FC = () => {
             </div>
           </div>
 
-          {dataLoading ? <>loading...</> : data && data.table?.length > 0 ?
-            <MiniChart chartData={formatDataForChart()} />
+          {dataLoading ? <>loading...</> : prices && prices?.length > 0 ?
+            <MiniChart chartData={formatDataForChart()} prices={prices}  />
             : noChartPlaceHolder()}
           {/* <img src={graph_PH} alt="" /> */}
         </FlexboxGrid>

@@ -9,14 +9,20 @@ interface DataPoints {
 
 interface MiniChartProps {
   chartData: DataPoints;
+  prices: any
 }
 
-const ApexChart: React.FC<MiniChartProps> = ({ chartData }) => {
+const ApexChart: React.FC<MiniChartProps> = ({ chartData , prices }) => {
+  const [pricesArray, setPricesArray] = useState([])
   const [data, setData] = useState<(number | null)[]>([]);
   const [dataState, setDataState] = useState<'L' | 'N' | 'Y'>('L'); // loading - No - Yes
   const [chartLabels, setChartLabels] = useState<string[]>([]);
   const [chartDateRange, setChartDateRange] = useState<'week' | 'month' | 'year'>('week');
-
+  useEffect(() => {
+    console.log('chartData ==>',chartData)
+    setPricesArray(prices)
+  }, [])
+  
   useEffect(() => {
     setDataState("L")
     filterData(chartDateRange)
@@ -281,9 +287,34 @@ const ApexChart: React.FC<MiniChartProps> = ({ chartData }) => {
         <button className={`chart-btn ${chartDateRange == 'year' && 'active'}`} onClick={() => setChartDateRange('year')}>Last Year</button>
       </div>
       <div id="chart">
-        {dataState == "L" ? loadingPlaceHolder() : dataState == "N" ? noDataPlaceHolder() :
-          <ReactApexChart options={options} series={[{ name: 'Price', data: data }]} type="bar" height={350} width={450} />
-        }
+        {/* {dataState == "L" ? loadingPlaceHolder() : dataState == "N" ? noDataPlaceHolder() :
+          <ReactApexChart options={chartData} series={[{ name: 'Price', data: data }]} type="bar" height={350} width={450} />
+        } */}
+        <table className="table">
+          <thead>
+            <tr>
+              <th>Date</th>
+              <th>Price</th>
+            </tr>
+          </thead>
+          <tbody>
+            {/* {chartData.map((price) => <tr key={price.date}>
+              <td scope="row">
+                {price.date}
+              </td>
+              <td>
+              {price.price}
+
+              </td>
+            </tr>)} */}
+          {prices.map((price: any) => (
+            <tr key={price?.date}>
+              <td scope="row">{price?.date}</td>
+              <td>{price?.price}</td>
+            </tr>
+          ))}
+          </tbody>
+        </table>
       </div>
     </div>
   );
