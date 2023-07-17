@@ -92,7 +92,7 @@ const Profile: React.FC = () => {
 
     return (
         <div>
-            <HeaderProfile  />
+            <HeaderProfile userData={userData} />
 
 
             <ProfileSidebar  />

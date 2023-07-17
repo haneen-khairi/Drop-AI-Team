@@ -8,7 +8,7 @@ import { Link } from 'react-router-dom';
 //     activeKey: string;
 // }
 
-const CustomNavbarProfile: React.FC<React.ComponentProps<typeof Navbar>> = () => {
+const CustomNavbarProfile: React.FC<any> = ({userDataHeader}) => {
     return (
         // <Navbar {...props}>
         //     <Nav onSelect={onSelectNav} activeKey={activeKey}>
@@ -24,8 +24,8 @@ const CustomNavbarProfile: React.FC<React.ComponentProps<typeof Navbar>> = () =>
                 <Link className='nav-item' to={`/`}>Home</Link>
                 <Link className='nav-item' to={`/wishlist`}>Wishlist</Link>
                 <Link className='nav-item' to={`/login`}>
-                <img src={usericon} className="iconsidebar"   alt="logout" />
-                    User name</Link>
+                <img src={userDataHeader.image === null ? usericon : userDataHeader.image} className="iconsidebar"   alt="logout" />
+                    {userDataHeader.first_name}</Link>
                
               
             </ul>

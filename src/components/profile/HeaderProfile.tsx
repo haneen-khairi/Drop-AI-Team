@@ -4,9 +4,10 @@ import { Link } from 'react-router-dom';
 import CustomNavbarProfile from './CustomNavbarProfile';
  
 
-const HeaderProfile: React.FC = () => {
-    // const [activeKey, setActiveKey] = React.useState("1");
 
+const HeaderProfile: React.FC<any> = ({userData}) => {
+    // const [activeKey, setActiveKey] = React.useState("1");
+    console.log('navbar -->',userData)
     return (
         <header className="home-header">
              
@@ -19,7 +20,7 @@ const HeaderProfile: React.FC = () => {
              <Link className='profile btn btn-primary' to={`/`}>Search by social media</Link>
          
             {/* <CustomNavbar appearance="subtle" activeKey={activeKey} onSelectNav={setActiveKey} /> */}
-            <CustomNavbarProfile appearance="subtle" />
+            <CustomNavbarProfile userDataHeader={userData} appearance="subtle" />
         </header>
     );
 };
