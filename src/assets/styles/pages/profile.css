@@ -23,7 +23,7 @@ a.profile.btn.btn-primary {
   justify-content: center;
   align-items: center;
   gap: 10px;
-  border: none;
+  border: 1px solid transparent;
 }
 a.profile.btn.btn-primary:hover {
   border-radius: 30px;
@@ -32,7 +32,9 @@ a.profile.btn.btn-primary:hover {
  color: #8C5CB3;
   border: 1px solid #8C5CB3;
 }
- 
+.sidebar a,.sidebar a:hover{
+  text-decoration: none;
+}
 .sidebar a.nav-link {
   color: #8C5CB3;
  
@@ -48,7 +50,8 @@ line-height: normal;
 .sidebar{
   border-right: 2px solid #c7a8e2a4;
   width: 200px;
-  height: 857px;
+  position: relative;
+  height: 100%;
 }
 .sidebar li.active{
   border-right: 4px solid #8C5CB3;
@@ -65,7 +68,7 @@ line-height: normal;
   top: 0;
   bottom: 0;
   left: 0;
-  margin-top: 100px;
+  margin-top: 150px;
   padding-left: 70px;
 }
 .app-container {
@@ -74,8 +77,9 @@ line-height: normal;
 
 .app-container input {
     border-radius: 6px;
-border: 1px solid #A4A4A4;
-width: 463px;
+    border: 1px solid #cfcfcf;
+    width: 100%;
+    max-width: 450px;
 height: 38px;
 flex-shrink: 0;
 }
@@ -90,7 +94,7 @@ align-items: center;
 gap: 10px;
 }
 .app-container form {
-  padding-top: 50px;
+  padding-top: 85px;
 }
 body{
     background: #fff ;
@@ -275,4 +279,24 @@ border: none;
 }
 button.btn.btn-primary.loginbtn.addlink.links {
   margin-top: 50px;
+}
+.sidebar li{
+  margin-bottom:10px;
+  width:100%;
+  border-radius: 6px 0px 0px 6px;
+}
+.sidebar li:hover{
+  background: #8f59bb14;
+}
+.sidebar li:last-child{
+    position: absolute;
+    bottom: 50px;
+    left: 0px;
+}
+.Logout{
+color:#c6322a!important;
+font-size:15px!important;
+}
+.contect label{
+  margin-bottom:5px;
 }

@@ -12,12 +12,13 @@ const ProfilePassword: React.FC = () => {
          
             <ProfileSidebar />
             <div className="container contect app-container">
-            <h3 className="pt-4">Password settings</h3>
+   
       
               
             <form>
+            <h5 className="pt-4">Password settings</h5>
           <div className="form-group">
-          <label htmlFor="mobile_number">Password settings</label>
+          <label htmlFor="mobile_number">Current Password</label>
             <input
               type="password"
               id="mobile_number"
@@ -45,7 +46,7 @@ const ProfilePassword: React.FC = () => {
             />
           </div>
           
-          <button type="submit" className="btn btn-primary loginbtn">Update Profile</button>
+          <button type="submit" className="btn btn-primary loginbtn">Update Password</button>
         
          
 
