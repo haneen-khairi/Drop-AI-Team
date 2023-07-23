@@ -118,7 +118,7 @@ const ProductDetails: React.FC = () => {
     return (
       <>
         <Header className="search-header" />
-        <Container className="search-content">
+        <Container className="search-content search-content2">
           <div>Loading...</div>
         </Container>
       </>
@@ -129,7 +129,7 @@ const ProductDetails: React.FC = () => {
     return (
       <>
         <Header className="search-header" />
-        <Container className="search-content">
+        <Container className="search-content search-content2">
           <div>Error loading data</div>
         </Container>
       </>
@@ -139,9 +139,9 @@ const ProductDetails: React.FC = () => {
   return (
     <>
       <Header className="search-header" />
-      <Container className="search-content">
+      <Container className=" search-content search-content2">
         <FlexboxGrid className="details-main-content2">
-          <div className="card details-card p2">
+          <div className="card details-card card-height p2">
             <img
               src={data.image_url}
               alt={data.name}
