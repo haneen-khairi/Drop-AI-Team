@@ -3,6 +3,7 @@ import { SocialSearchQ } from 'utils/types';
 import { Input, InputGroup, Button, Stack, Form, RadioTileGroup, RadioTile, Panel, PanelGroup, Placeholder, Pagination, Grid, Row, Col } from 'rsuite';
 
 import { Search, Funnel } from '@rsuite/icons';
+import axios from 'axios';
 interface FilterSearchProps {
     onFilterChange: (filter: SocialSearchQ) => void;
 }
@@ -20,8 +21,13 @@ const SocialSearchBox: React.FC<FilterSearchProps> = ({ onFilterChange }) => {
             searchValue,
             keyword
         };
-
-        onFilterChange(searchQ);
+        axios.get(`https://dropshipping-app-ingsl.ondigitalocean.app/facebook/page_details/PetSimple/`).then((data) => {
+            console.log(data,' data of search')
+        }).then((error) => {
+            console.log('error in search',error)
+        })
+        console.log('searchQ',searchQ)
+        // onFilterChange(searchQ);
     };
 
     const [activePage, setActivePage] = React.useState(5);
@@ -49,8 +55,8 @@ const SocialSearchBox: React.FC<FilterSearchProps> = ({ onFilterChange }) => {
                         <RadioTile disabled>
                             coming soon
                         </RadioTile>
-                        <RadioTile disabled>
-                        coming soon
+                        <RadioTile value='page'>
+                            Page
                         </RadioTile>
                         <RadioTile value="word">
                             Word

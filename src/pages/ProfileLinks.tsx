@@ -7,8 +7,8 @@ import { Button, Form, ButtonToolbar, Modal, Input } from 'rsuite';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
 interface Link {
-    name: string;
-    link: string;
+    page_name: string;
+    page_link: string;
   }
 
 const ProfileLinks: React.FC = () => {
@@ -28,13 +28,14 @@ const ProfileLinks: React.FC = () => {
         await axios.get(`https://dropshipping-app-ingsl.ondigitalocean.app/account/get_pages/`, {headers: {
             Authorization: `Bearer ${localStorage.getItem('token')}`
         }}).then((data) => {
-            console.log('get links', data)
+            console.log('get links', data.data)
+            setLinks(data.data)
         }).catch((error) => {
             console.log('error in links',error)
         })
     }
     const handleAddLink = () => {
-        const newLinkObject: Link = { name: newName, link: newLink };
+        const newLinkObject: Link = { page_name: newName, page_link: newLink };
         axios.post(`https://dropshipping-app-ingsl.ondigitalocean.app/account/add_pages/`, {
             page_name: newName, 
             page_link: newLink
@@ -89,9 +90,9 @@ const ProfileLinks: React.FC = () => {
 
                 {links.map((link, index) => (
                     <div className="links" key={index}>
-                        <h3 className="links">{link.name}</h3>
-                        <Link to={link.link} target="_blank" rel="noopener noreferrer">
-                {link.link}
+                        <h3 className="links">{link.page_name}</h3>
+                        <Link to={link.page_link} target="_blank" rel="noopener noreferrer">
+                {link.page_link}
               </Link>
                     </div>
                 ))}
