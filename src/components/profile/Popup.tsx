@@ -1,12 +1,12 @@
-import React from 'react';
+import React, { FC } from 'react';
 
 interface PopupProps {
   isOpen: boolean;
   onClose: () => void;
-  children: React.ReactNode;
+  children?: React.ReactNode;
 }
 
-const Popup: React.FC<PopupProps> = ({ isOpen, onClose, children }) => {
+const Popup: FC<PopupProps> = ({ isOpen, onClose, children }) => {
   if (!isOpen) {
     return null; // If the popup is not open, don't render anything
   }
@@ -15,7 +15,7 @@ const Popup: React.FC<PopupProps> = ({ isOpen, onClose, children }) => {
     <div className="popup-overlay">
       <div className="popup-content">
         {children}
-        <button  className="close-btn btn btn-primary Cancel" onClick={onClose}>
+        <button className="close-btn btn btn-primary Cancel" onClick={onClose}>
           Close
         </button>
       </div>

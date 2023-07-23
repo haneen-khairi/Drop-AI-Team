@@ -144,3 +144,24 @@ code {
   top: 20px !important;
   width: 16px;
 }
+input[type=number] {
+  -moz-appearance: textfield!important;
+}
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+.alert{
+  margin-top:10px!important;
+}
+.addButton{
+  background-color: #8C5CB3!important;
+  color:#fff;
+  min-width:100px;
+}
+.cancelButton{
+  background-color: transparent!important;
+  color:#8C5CB3;
+  min-width:100px;
+}
