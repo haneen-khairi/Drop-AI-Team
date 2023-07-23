@@ -9,14 +9,15 @@ interface FilterSearchProps {
     onFilterChange: (filter: SocialSearchQ) => void;
 }
 interface List {
-    name:string;
-    Post_Content: string;
-    _id: any;
+    'name':string;
+    'Page ID': string;
+    'url': string;
 }
 
 const SocialSearchBox: React.FC<FilterSearchProps> = ({ onFilterChange }) => {
     const [searchValue, setSearchValue] = useState<string>('');
     const [keyword, setKeyword] = useState<string>('word');
+    const [totalPages, setTotalPages] = useState(0)
     const [lists, setLists] = useState<List[]>([])
     const [pageMode, setPageMode] = useState(false)
     const handleInputChange = (value: string) => {
@@ -28,19 +29,32 @@ const SocialSearchBox: React.FC<FilterSearchProps> = ({ onFilterChange }) => {
             searchValue,
             keyword
         };
-        axios.get(`https://dropshipping-app-ingsl.ondigitalocean.app/facebook/page_details/?page_name=${searchQ.searchValue}`).then((data) => {
-            console.log(data.data.pages,' data of search')
+        setSearchValue(searchQ.searchValue)
+        if(searchQ.keyword === 'page'){
+            onSearchPage(searchQ.searchValue, 1)
+        }
+        console.log('searchQ',searchQ)
+        onFilterChange(searchQ);
+    };
+    function onPaginateResults(page:any){
+        console.log('on paginate',page)
+        setActivePage(page)
+        onSearchPage(searchValue, page)
+    }
+    function onSearchPage(query:string, page: number | string){
+        axios.get(`https://dropshipping-app-ingsl.ondigitalocean.app/core/page_search/?queryset=${query}&page=${page}`).then((data) => {
+            console.log(data,'data of search')
             setLists(data.data.pages)
+        const totalPages = data.data.total_pages;
+        const actualTotalPages = Math.ceil(totalPages / 6)
+            setTotalPages(actualTotalPages)
             setPageMode(true)
         }).catch((error) => {
             console.log('error in search ',error)
         })
-        console.log('searchQ',searchQ)
-        onFilterChange(searchQ);
-    };
-
-    const [activePage, setActivePage] = React.useState(5);
-    return (
+    }
+    const [activePage, setActivePage] = React.useState(1);
+    return <>
         <Form onSubmit={handleFilterClick}>
             <Stack className='social-stack' direction='column' spacing={30} >
                 <Stack.Item className='filter-txt-form' grow={1} alignSelf='stretch'>
@@ -77,59 +91,36 @@ const SocialSearchBox: React.FC<FilterSearchProps> = ({ onFilterChange }) => {
             </Stack>
           
             <Grid>
-                <Row className="show-grid fix-margin">
-                    <Col lg={24} xl={24} xxl={24}>
-                    About 81,200 results 
-                        <div className='bg-greyf fix-margin'>
-                            
-                            {pageMode ? <PanelGroup>
-                                {lists.map((list, index) => <Panel key={index} header={list?.name}>
-                                    <a href={list._id}>
-                                        <p>{list?.Post_Content}</p>
-                                    </a>
-                                </Panel>)}
-                            </PanelGroup> : <PanelGroup>
-                                <Panel header="Lorem ipsum dolor sit amet consectetu">
-                                    <p>lorem umm accumsan lectus. Diam arcu id nec magna mauris commodo tellus molestiemm accumsan lectus. Diam arcu id nec</p>
-                                </Panel>
-                                <Panel header="Lorem ipsum dolor sit amet consectetu">
-                                    <p>lorem umm accumsan lectus. Diam arcu id nec magna mauris commodo tellus molestiemm accumsan lectus. Diam arcu id nec</p>
-
-                                </Panel>
-                                <Panel header="Panel 3">
-                                    <Placeholder.Paragraph />
-                                </Panel>
-                                <Panel header="Panel 4">
-                                    <Placeholder.Paragraph />
-                                </Panel>
-                                <Panel header="Panel 5">
-                                    <Placeholder.Paragraph />
-                                </Panel>
-                                <Panel header="Panel 6">
-                                    <Placeholder.Paragraph />
-                                </Panel>
-                            </PanelGroup>}
-                            <Stack spacing={6} wrap justifyContent='center'>
-                            <Pagination 
-                                prev
-                                last
-                                next
-                                first
-                                size="xs"
-                                total={100}
-                                limit={10}
-                                activePage={activePage}
-                                onChangePage={setActivePage}
-                            />
-                            </Stack>
-                        </div>
-                    </Col>
-
-                </Row>
             </Grid>
 
         </Form>
-    );
+        <Row className="show-grid fix-margin">
+            <Col lg={24} xl={24} xxl={24}>
+            About 81,200 results 
+                <div className='bg-greyf fix-margin'>
+                    
+                    {pageMode && <PanelGroup>
+                        {lists.map((list, index) =><Link key={index} to={`social-page/${list['Page ID']}`}> <Panel  header={list?.name}>
+                            
+                            
+                        </Panel></Link>)} </PanelGroup>}
+                    {totalPages > 1 && <Stack spacing={6} wrap justifyContent='center'>
+                    <Pagination 
+                        prev
+                        last
+                        next
+                        first
+                        size="xs"
+                        total={totalPages}
+                        activePage={activePage}
+                        onChangePage={onPaginateResults}
+                    />
+                    </Stack>}
+                </div>
+            </Col>
+
+        </Row>
+    </>;
 };
 
 export default SocialSearchBox;

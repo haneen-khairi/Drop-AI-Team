@@ -31,7 +31,7 @@ const ApexChart: React.FC<MiniChartProps> = ({ chartData , prices }) => {
     // filterData(chartDateRange)
   }, [chartDateRange])
   function chartValuesCOnverted(){
-    const data = prices.map((price:any) => parseInt(price.price.split('.00$')[0]))
+    const data = prices.map((price:any) => parseInt(price.price.split('$')[0]))
     const dates = prices.map((price:any) => price.date)
     setChartValues(data)
     setChartLabels(dates)
