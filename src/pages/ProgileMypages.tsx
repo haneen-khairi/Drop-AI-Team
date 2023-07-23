@@ -1,5 +1,5 @@
 
-import React, { useState } from 'react';
+import React, { useState , useEffect } from 'react';
 import Popup from './../components/profile/Popup';
 
 import HeaderProfile from '../components/profile/HeaderProfile';
@@ -7,9 +7,31 @@ import ProfileSidebar from '../components/ProfileSidebar';
 import addlink from '../assets/img/profile/Addlink.svg';
 import '../assets/styles/pages/profile.css';
 import { Button, Modal } from 'rsuite';
+import axios from 'axios';
 const ProgileMypages: React.FC = () => { 
 
-
+    const [userData, setUserData] = useState({
+        first_name: '',
+        last_name: '',
+        mobile_number: '',
+        image: null as any
+    })
+    async function getUserdata(){
+      await axios.get(`https://dropshipping-app-ingsl.ondigitalocean.app/account/get_profile/`, {
+          headers: {
+              Authorization: `Bearer ${localStorage.getItem('token')}`
+          }
+      }).then((data) => {
+          console.log('geting profile data',data)
+          setUserData(data.data.data)
+      }).catch((error) => {
+          console.log('error in geting profile',error)
+      })
+    }
+    useEffect(() => {
+      
+      getUserdata()
+  }, [])
     const [open, setOpen] = React.useState(false);
     const handleOpen = () => setOpen(true);
     const handleClose = () => setOpen(false);
@@ -23,7 +45,7 @@ const ProgileMypages: React.FC = () => {
 
     return (
         <div>
-            <HeaderProfile />
+            <HeaderProfile userData={userData} />
 
 
             <ProfileSidebar />

@@ -1,10 +1,11 @@
-import React, { useState } from 'react';
+import React, { useState , useEffect } from 'react';
 import HeaderProfile from '../components/profile/HeaderProfile';
 import ProfileSidebar from '../components/ProfileSidebar';
 import addlink from '../assets/img/profile/Addlink.svg';
 import '../assets/styles/pages/profile.css';
 import { Button, Form, ButtonToolbar, Modal, Input } from 'rsuite';
 import { Link } from 'react-router-dom';
+import axios from 'axios';
 interface Link {
     name: string;
     link: string;
@@ -23,18 +24,57 @@ const ProfileLinks: React.FC = () => {
     const handleShow = () => {
         handleOpen();
     }
-
+    const getPageLinks = async() => {
+        await axios.get(`https://dropshipping-app-ingsl.ondigitalocean.app/account/get_pages/`, {headers: {
+            Authorization: `Bearer ${localStorage.getItem('token')}`
+        }}).then((data) => {
+            console.log('get links', data)
+        }).catch((error) => {
+            console.log('error in links',error)
+        })
+    }
     const handleAddLink = () => {
         const newLinkObject: Link = { name: newName, link: newLink };
+        axios.post(`https://dropshipping-app-ingsl.ondigitalocean.app/account/add_pages/`, {
+            page_name: newName, 
+            page_link: newLink
+        }, {headers: {
+            Authorization: `Bearer ${localStorage.getItem('token')}`
+        }}).then((data) => {
+            console.log('add link',data)
+        }).catch((error) => {
+            console.log('error in add link', error)
+        }) 
         setLinks(prevLinks => [...prevLinks, newLinkObject]);
         setNewName('');
         setNewLink('');
         handleClose();
     }
-
+    const [userData, setUserData] = useState({
+        first_name: '',
+        last_name: '',
+        mobile_number: '',
+        image: null as any
+    })
+    async function getUserdata(){
+      await axios.get(`https://dropshipping-app-ingsl.ondigitalocean.app/account/get_profile/`, {
+          headers: {
+              Authorization: `Bearer ${localStorage.getItem('token')}`
+          }
+      }).then((data) => {
+          console.log('geting profile data',data)
+          setUserData(data.data.data)
+      }).catch((error) => {
+          console.log('error in geting profile',error)
+      })
+    }
+    useEffect(() => {
+            getPageLinks()
+            getUserdata()
+    }, [])
     return (
         <div>
-            <HeaderProfile />
+            <HeaderProfile userData={userData} />
             <ProfileSidebar />
             <div className="container contect app-container">
                 <h1 className="link">Links</h1>

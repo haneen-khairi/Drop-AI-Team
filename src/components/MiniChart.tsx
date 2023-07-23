@@ -14,20 +14,29 @@ interface MiniChartProps {
 
 const ApexChart: React.FC<MiniChartProps> = ({ chartData , prices }) => {
   const [pricesArray, setPricesArray] = useState([])
+  const [chartValues, setChartValues] = useState([])
   const [data, setData] = useState<(number | null)[]>([]);
   const [dataState, setDataState] = useState<'L' | 'N' | 'Y'>('L'); // loading - No - Yes
   const [chartLabels, setChartLabels] = useState<string[]>([]);
   const [chartDateRange, setChartDateRange] = useState<'week' | 'month' | 'year'>('week');
   useEffect(() => {
-    console.log('chartData ==>',chartData)
+    console.log('chartData ==>', prices)
+    chartValuesCOnverted()
     setPricesArray(prices)
+
   }, [])
   
   useEffect(() => {
     setDataState("L")
-    filterData(chartDateRange)
+    // filterData(chartDateRange)
   }, [chartDateRange])
-
+  function chartValuesCOnverted(){
+    const data = prices.map((price:any) => parseInt(price.price.split('.00$')[0]))
+    const dates = prices.map((price:any) => price.date)
+    setChartValues(data)
+    setChartLabels(dates)
+    console.log(data)
+  }
   const getWeekData = () => {
     const currentDate = new Date();
     const labels: string[] = [];
@@ -46,7 +55,7 @@ const ApexChart: React.FC<MiniChartProps> = ({ chartData , prices }) => {
       }
       labels.push(formattedDate);
     }
-
+    console.log('ss==>?',labels, values, noDataFlag)
     return { labels, values, noDataFlag };
   };
 
@@ -183,32 +192,32 @@ const ApexChart: React.FC<MiniChartProps> = ({ chartData , prices }) => {
     </div>
   }
 
-  const filterData = (filterType: 'week' | 'month' | 'year') => {
+  // const filterData = (filterType: 'week' | 'month' | 'year') => {
 
-    if (filterType == 'week') {
-      const { labels, values, noDataFlag } = getWeekData()
-      setData(values);
-      setChartLabels(labels);
-      noDataFlag ? setDataState('N') : setDataState('Y');
-    }
-    if (filterType == 'month') {
-      const { labels, values, noDataFlag } = getMonthData()
-      setData(values);
-      setChartLabels(labels)
-      noDataFlag ? setDataState('N') : setDataState('Y');
-    }
-    if (filterType == 'year') {
-      const { labels, values, yearNoDataFlag } = getYearData()
-      setData(values);
-      setChartLabels(labels)
-      yearNoDataFlag ? setDataState('N') : setDataState('Y');
-    }
-  };
+  //   if (filterType == 'week') {
+  //     const { labels, values, noDataFlag } = getWeekData()
+  //     setData(values);
+  //     setChartLabels(labels);
+  //     noDataFlag ? setDataState('N') : setDataState('Y');
+  //   }
+  //   if (filterType == 'month') {
+  //     const { labels, values, noDataFlag } = getMonthData()
+  //     setData(values);
+  //     setChartLabels(labels)
+  //     noDataFlag ? setDataState('N') : setDataState('Y');
+  //   }
+  //   if (filterType == 'year') {
+  //     const { labels, values, yearNoDataFlag } = getYearData()
+  //     setData(values);
+  //     setChartLabels(labels)
+  //     yearNoDataFlag ? setDataState('N') : setDataState('Y');
+  //   }
+  // };
 
   const options: ApexOptions = {
     chart: {
       height: 350,
-      type: 'bar',
+      type: 'line',
       dropShadow: {
         enabled: true,
         color: '#000',
@@ -253,14 +262,7 @@ const ApexChart: React.FC<MiniChartProps> = ({ chartData , prices }) => {
     xaxis: {
       type: 'category',
       categories: chartLabels,
-      labels: {
-        formatter: function (value: string) {
-          return chartDateRange == 'year' ? new Date(value).toLocaleString('default', { month: 'short' }) : `${formatShortDate(new Date(value))}`;
-        },
-        style: {
-          cssClass: 'xaxis-labels',
-        }
-      },
+
     },
     yaxis: {
       // title: {
@@ -287,10 +289,13 @@ const ApexChart: React.FC<MiniChartProps> = ({ chartData , prices }) => {
         <button className={`chart-btn ${chartDateRange == 'year' && 'active'}`} onClick={() => setChartDateRange('year')}>Last Year</button>
       </div>
       <div id="chart">
+        <ReactApexChart options={options} series={[{
+                name: "Desktops",
+                data: chartValues
+        }]} type="line" height={350} width={450} />
         {/* {dataState == "L" ? loadingPlaceHolder() : dataState == "N" ? noDataPlaceHolder() :
-          <ReactApexChart options={chartData} series={[{ name: 'Price', data: data }]} type="bar" height={350} width={450} />
         } */}
-        <table className="table">
+        {/* <table className="table">
           <thead>
             <tr>
               <th>Date</th>
@@ -298,15 +303,7 @@ const ApexChart: React.FC<MiniChartProps> = ({ chartData , prices }) => {
             </tr>
           </thead>
           <tbody>
-            {/* {chartData.map((price) => <tr key={price.date}>
-              <td scope="row">
-                {price.date}
-              </td>
-              <td>
-              {price.price}
-
-              </td>
-            </tr>)} */}
+            
           {prices.map((price: any) => (
             <tr key={price?.date}>
               <td scope="row">{price?.date}</td>
@@ -314,7 +311,7 @@ const ApexChart: React.FC<MiniChartProps> = ({ chartData , prices }) => {
             </tr>
           ))}
           </tbody>
-        </table>
+        </table> */}
       </div>
     </div>
   );
