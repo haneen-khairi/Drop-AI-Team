@@ -4,14 +4,21 @@ import { Input, InputGroup, Button, Stack, Form, RadioTileGroup, RadioTile, Pane
 
 import { Search, Funnel } from '@rsuite/icons';
 import axios from 'axios';
+import { Link } from 'react-router-dom';
 interface FilterSearchProps {
     onFilterChange: (filter: SocialSearchQ) => void;
+}
+interface List {
+    name:string;
+    Post_Content: string;
+    _id: any;
 }
 
 const SocialSearchBox: React.FC<FilterSearchProps> = ({ onFilterChange }) => {
     const [searchValue, setSearchValue] = useState<string>('');
     const [keyword, setKeyword] = useState<string>('word');
-
+    const [lists, setLists] = useState<List[]>([])
+    const [pageMode, setPageMode] = useState(false)
     const handleInputChange = (value: string) => {
         setSearchValue(value);
     };
@@ -22,9 +29,11 @@ const SocialSearchBox: React.FC<FilterSearchProps> = ({ onFilterChange }) => {
             keyword
         };
         axios.get(`https://dropshipping-app-ingsl.ondigitalocean.app/facebook/page_details/PetSimple/`).then((data) => {
-            console.log(data,' data of search')
-        }).then((error) => {
-            console.log('error in search',error)
+            console.log(data.data.pages,' data of search')
+            setLists(data.data.pages)
+            setPageMode(true)
+        }).catch((error) => {
+            console.log('error in search ',error)
         })
         console.log('searchQ',searchQ)
         // onFilterChange(searchQ);
@@ -73,7 +82,13 @@ const SocialSearchBox: React.FC<FilterSearchProps> = ({ onFilterChange }) => {
                     About 81,200 results 
                         <div className='bg-greyf fix-margin'>
                             
-                            <PanelGroup>
+                            {pageMode ? <PanelGroup>
+                                {lists.map((list, index) => <Panel key={index} header={list?.name}>
+                                    <a href={list._id}>
+                                        <p>{list?.Post_Content}</p>
+                                    </a>
+                                </Panel>)}
+                            </PanelGroup> : <PanelGroup>
                                 <Panel header="Lorem ipsum dolor sit amet consectetu">
                                     <p>lorem umm accumsan lectus. Diam arcu id nec magna mauris commodo tellus molestiemm accumsan lectus. Diam arcu id nec</p>
                                 </Panel>
@@ -93,7 +108,7 @@ const SocialSearchBox: React.FC<FilterSearchProps> = ({ onFilterChange }) => {
                                 <Panel header="Panel 6">
                                     <Placeholder.Paragraph />
                                 </Panel>
-                            </PanelGroup>
+                            </PanelGroup>}
                             <Stack spacing={6} wrap justifyContent='center'>
                             <Pagination 
                                 prev
