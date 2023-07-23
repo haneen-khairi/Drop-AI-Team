@@ -17,6 +17,7 @@ import SeeMore from 'pages/More';
 import ShowCountry from 'pages/ShowCountry';
 import ShowFactory from 'pages/ShowFactory';
 import BestSeller from 'pages/BestSeller';
+import SocialPage from 'pages/SocialPage';
 // import AuthService from "./services/auth.service";
 // import IUser from './types/user.type';
 // import EventBus from "./common/EventBus";
@@ -43,6 +44,7 @@ const App: React.FC = () => {
           <Route path="/products/:id" element={<ProductDetails />} />
           <Route path="/social-search" element={<SocialSearch />} />
           <Route path="/social-word" element={<SocialWord />} />
+          <Route path="/social-page/:id" element={<SocialPage />} />
           <Route path="/more-ai" element={<SeeMore />} />
           <Route path="/more-tictok" element={<SeeMore />} />
           <Route path="/more-deals" element={<SeeMore />} />

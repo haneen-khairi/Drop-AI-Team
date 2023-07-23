@@ -100,7 +100,7 @@ const SocialSearchBox: React.FC<FilterSearchProps> = ({ onFilterChange }) => {
                 <div className='bg-greyf fix-margin'>
                     
                     {pageMode && <PanelGroup>
-                        {lists.map((list, index) =><Link key={index} to={`social-page/${list['Page ID']}`}> <Panel  header={list?.name}>
+                        {lists.map((list, index) =><Link key={index} to={`/social-page/${list['Page ID']}`}> <Panel  header={list?.name}>
                             
                             
                         </Panel></Link>)} </PanelGroup>}
