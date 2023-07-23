@@ -28,7 +28,7 @@ const SocialSearchBox: React.FC<FilterSearchProps> = ({ onFilterChange }) => {
             searchValue,
             keyword
         };
-        axios.get(`https://dropshipping-app-ingsl.ondigitalocean.app/facebook/page_details/PetSimple/`).then((data) => {
+        axios.get(`https://dropshipping-app-ingsl.ondigitalocean.app/facebook/page_details/?page_name=${searchQ.searchValue}`).then((data) => {
             console.log(data.data.pages,' data of search')
             setLists(data.data.pages)
             setPageMode(true)
@@ -36,7 +36,7 @@ const SocialSearchBox: React.FC<FilterSearchProps> = ({ onFilterChange }) => {
             console.log('error in search ',error)
         })
         console.log('searchQ',searchQ)
-        // onFilterChange(searchQ);
+        onFilterChange(searchQ);
     };
 
     const [activePage, setActivePage] = React.useState(5);
