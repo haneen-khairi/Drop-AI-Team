@@ -44,7 +44,7 @@ const App: React.FC = () => {
           <Route path="/products/:id" element={<ProductDetails />} />
           <Route path="/social-search" element={<SocialSearch />} />
           <Route path="/social-word" element={<SocialWord />} />
-          <Route path="/social-page/:id" element={<SocialPage />} />
+          <Route path="/social-page/:name" element={<SocialPage />} />
           <Route path="/more-ai" element={<SeeMore />} />
           <Route path="/more-tictok" element={<SeeMore />} />
           <Route path="/more-deals" element={<SeeMore />} />
