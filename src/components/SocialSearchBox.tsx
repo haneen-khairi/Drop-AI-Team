@@ -96,7 +96,7 @@ const SocialSearchBox: React.FC<FilterSearchProps> = ({ onFilterChange }) => {
         </Form>
         <Row className="show-grid fix-margin">
             <Col lg={24} xl={24} xxl={24}>
-            About 81,200 results 
+            {/* About 81,200 results  */}
                 <div className='bg-greyf fix-margin'>
                     
                     {pageMode && <PanelGroup>
