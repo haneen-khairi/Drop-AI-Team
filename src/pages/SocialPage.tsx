@@ -88,25 +88,27 @@ const SocialPage: React.FC = () => {
                 <Row className='page-boundaries'>
                     <Col style={{ display: "flex", flexDirection: "column", minHeight: "500px" }}>
                         <h3 className='title'>
-                            Searched Page: {name}
+                          {name}
                         </h3>
-                        <div className="">
+                        <div className="p-4">
                             <p>Email: {details?.Email === '' ? 'No email found' : details?.Email}</p>
+                            <br />
                             <p>Website: {details?.website === '' ? 'No website found' : details?.website}</p>
+                            <br />
                             <p>Mobile: {details?.mobile === '' ? 'No website found' : details?.mobile}</p>
                         </div>
                         <Row className='statistics-row'>
                             <Row>
                                 <p className='sub-title'>
-                                    His Activities
+                                    Page Information
                                 </p>
                             </Row>
                             <Row>
                                 <Col>
                                     <FacebookInterestCard
                                         content={statsLoading ? "Loading..." : String(pages.length || 0)}
-                                        text="Page Number"
-                                        Icon={FiFile}
+                                        text="User Number"
+                                        Icon={FiUsers}
                                         color="#EDEDF7"
                                         detailList={[String(query), 'page']}
                                     />
@@ -123,8 +125,8 @@ const SocialPage: React.FC = () => {
                                 <Col>
                                     <FacebookInterestCard
                                         content={statsLoading ? "Loading..." : String(stats?.users_number || 0)}
-                                        text="Last comment in user"
-                                        Icon={FiUsers}
+                                        text="Post Number"
+                                        Icon={FiFile}
                                         color="#ECF3E5"
                                         detailList={[String(query), 'user']}
                                     />
@@ -134,7 +136,7 @@ const SocialPage: React.FC = () => {
                         </Row>
                     </Col>
                     <Col xs={3}>
-                        <SideList keyword={String(query)} />
+                        {/* <SideList keyword={String(query)} /> */}
                     </Col>
                 </Row>
 
@@ -143,7 +145,7 @@ const SocialPage: React.FC = () => {
 
                         <Col xs={"auto"} >
                             <p className='sub-title'>
-                                His Comments
+                                Page Comments
                             </p>
                         </Col>
                         <Col>
