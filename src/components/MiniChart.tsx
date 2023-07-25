@@ -17,11 +17,11 @@ const ApexChart: React.FC<MiniChartProps> = ({ chartData , prices }) => {
   const [chartValues, setChartValues] = useState([])
   const [data, setData] = useState<(number | null)[]>([]);
   const [dataState, setDataState] = useState<'L' | 'N' | 'Y'>('L'); // loading - No - Yes
-  const [chartLabels, setChartLabels] = useState<string[]>([]);
+  const [chartLabels, setChartLabels] = useState<string>();
   const [chartDateRange, setChartDateRange] = useState<'week' | 'month' | 'year'>('week');
   useEffect(() => {
-    console.log('chartData ==>', prices)
-    chartValuesCOnverted()
+    // console.log('chartData ==>', prices)
+    chartValuesConverted()
     setPricesArray(prices)
 
   }, [])
@@ -30,12 +30,15 @@ const ApexChart: React.FC<MiniChartProps> = ({ chartData , prices }) => {
     setDataState("L")
     // filterData(chartDateRange)
   }, [chartDateRange])
-  function chartValuesCOnverted(){
-    const data = prices.map((price:any) => parseInt(price.price.split('$')[0]))
+  function chartValuesConverted(){
+    const pricesArray = prices.map((price:any) => price.priceNumber )
     const dates = prices.map((price:any) => price.date)
-    setChartValues(data)
+    console.log('prices ==>',data)
+    console.log('number ==>',prices.priceNumber)
+    console.log('date ==>',dates)
+    setChartValues(pricesArray)
     setChartLabels(dates)
-    console.log(data)
+    // console.log(data)
   }
   const getWeekData = () => {
     const currentDate = new Date();

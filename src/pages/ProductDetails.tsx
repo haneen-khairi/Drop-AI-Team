@@ -47,14 +47,23 @@ const ProductDetails: React.FC = () => {
     await axios.get(`https://dropshipping-app-ingsl.ondigitalocean.app/items/google_bard/?question=item_history&item=${name}`).then((data) => {
       console.log(data.data.prices)
       const prices = data.data.prices;
-      const pricesArray = Object.keys(prices).map(key => {
-        return {
-          date: key,
-          price: prices[key]
-        };
+      // const pricesArray = Object.keys(prices).map(key => {
+      //   return {
+      //     date: key,
+      //     price: prices[key]
+      //   };
+      // });
+      // console.log(pricesArray)
+      // Loop through the array and convert 'price' to a number
+      const priceArray = prices.map((price:any) => {
+        // Extract the numeric part of the price string and convert it to a number
+        const priceAsNumber = parseFloat(price.price.replace('$', ''));
+        
+        // Create a new object with the converted 'price' and the original 'date'
+        return { ...price, priceNumber: priceAsNumber };
       });
-      console.log(pricesArray)
-      setPrices(pricesArray)
+      console.log('priceArray ==>',priceArray)
+      setPrices(priceArray)
     }).catch((error) => {
       console.log(error)
     })
