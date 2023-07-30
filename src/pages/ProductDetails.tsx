@@ -265,8 +265,8 @@ const ProductDetails: React.FC = () => {
             </div>
           </div>
 
-          {dataLoading ? <>loading...</> : prices && prices?.length > 0 ?
-            <MiniChart chartData={formatDataForChart()} prices={prices}  />
+          {dataLoading ? <>loading...</> : data.table && data.table?.length > 0 ?
+            <MiniChart chartData={formatDataForChart()} prices={data.table}  />
             : noChartPlaceHolder()}
           {/* <img src={graph_PH} alt="" /> */}
         </FlexboxGrid>

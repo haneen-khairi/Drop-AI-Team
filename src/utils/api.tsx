@@ -116,8 +116,9 @@ export const fetchProductDetails = async (
 ): Promise<ProductDetails> => {
   try {
     const response = await axios.get(
-      `${baseApiURL}items/item_details/${id}/a/`
+      `${baseApiURL}items/item_details/${id}/all/`
     );
+    console.log('fetch detailss -->',response)
     return response.data.document;
   } catch (error) {
     console.error('Error fetching item details:', error);

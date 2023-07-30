@@ -31,13 +31,21 @@ const ApexChart: React.FC<MiniChartProps> = ({ chartData , prices }) => {
     // filterData(chartDateRange)
   }, [chartDateRange])
   function chartValuesConverted(){
-    const pricesArray = prices.map((price:any) => price.priceNumber )
-    const dates = prices.map((price:any) => price.date)
-    console.log('prices ==>',data)
-    console.log('number ==>',prices.priceNumber)
-    console.log('date ==>',dates)
+    const priceArrayOfObject = prices.map((priceObject:any) => {
+      const [date, priceStr] = Object.entries(priceObject)[0];
+      const price = parseFloat(priceStr as string);
+      return { date, price};
+    });
+    const pricesArray = priceArrayOfObject.map((price:any) => price.price )
+    const dateArray = priceArrayOfObject.map((price:any) => price.date )
+
+    console.log('pricesArray ++>' , pricesArray)
+    // const dates = prices.map((price:any) => price.date)
+    console.log('date ++>',dateArray)
+    console.log('price ==>',prices)
+    // console.log('date ==>',dates)
     setChartValues(pricesArray)
-    setChartLabels(dates)
+    setChartLabels(dateArray)
     // console.log(data)
   }
   const getWeekData = () => {
