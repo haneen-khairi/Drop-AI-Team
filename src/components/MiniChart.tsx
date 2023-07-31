@@ -18,7 +18,7 @@ const ApexChart: React.FC<MiniChartProps> = ({ chartData , prices }) => {
   const [data, setData] = useState<(number | null)[]>([]);
   const [dataState, setDataState] = useState<'L' | 'N' | 'Y'>('L'); // loading - No - Yes
   const [chartLabels, setChartLabels] = useState<string>();
-  const [chartDateRange, setChartDateRange] = useState<'week' | 'month' | 'year'>('week');
+  const [chartDateRange, setChartDateRange] = useState<'all' | 'week' | 'month' | 'year'>('all');
   useEffect(() => {
     // console.log('chartData ==>', prices)
     chartValuesConverted()
@@ -31,18 +31,21 @@ const ApexChart: React.FC<MiniChartProps> = ({ chartData , prices }) => {
     // filterData(chartDateRange)
   }, [chartDateRange])
   function chartValuesConverted(){
+
+    // Step 3: Filter the array to include data from the last 7 days
     const priceArrayOfObject = prices.map((priceObject:any) => {
       const [date, priceStr] = Object.entries(priceObject)[0];
       const price = parseFloat(priceStr as string);
       return { date, price};
     });
+    
     const pricesArray = priceArrayOfObject.map((price:any) => price.price )
     const dateArray = priceArrayOfObject.map((price:any) => price.date )
 
-    console.log('pricesArray ++>' , pricesArray)
-    // const dates = prices.map((price:any) => price.date)
-    console.log('date ++>',dateArray)
-    console.log('price ==>',prices)
+    // console.log('pricesArray ++>' , pricesArray)
+    // // const dates = prices.map((price:any) => price.date)
+    // console.log('date ++>',dateArray)
+    // console.log('price ==>',prices)
     // console.log('date ==>',dates)
     setChartValues(pricesArray)
     setChartLabels(dateArray)
@@ -190,7 +193,81 @@ const ApexChart: React.FC<MiniChartProps> = ({ chartData , prices }) => {
     return `${day} ${monthName}`;
   };
 
+  function onSelectDate(date:string){
+        // Step 1: Get the current date
+        const currentDate = new Date();
 
+        // Step 2: Calculate the date 7 days ago
+        const sevenDaysAgo = new Date();
+        sevenDaysAgo.setDate(currentDate.getDate() - 7);
+    
+        const lastMonth = new Date(currentDate);
+        lastMonth.setMonth(currentDate.getMonth() - 1);
+    
+        const lastYear = new Date(currentDate);
+        lastYear.setFullYear(currentDate.getFullYear() - 1);
+    
+        // Step 3: Filter the array to include data from the last 7 days
+        const priceArrayOfObject = prices.map((priceObject:any) => {
+          const [date, priceStr] = Object.entries(priceObject)[0];
+          const price = parseFloat(priceStr as string);
+          return { date, price};
+        });
+        const filteredDataLastWeek = priceArrayOfObject.filter((price:any) => {
+          const itemDate = new Date(price.date);
+          return itemDate >= sevenDaysAgo && itemDate <= currentDate;
+        });
+        const filteredDataLastMonth = priceArrayOfObject.filter((price:any) => {
+          const itemDate = new Date(price.date);
+          return itemDate >= lastMonth && itemDate <= currentDate;
+        });
+        const filteredDataLastYear = priceArrayOfObject.filter((price:any) => {
+          const itemDate = new Date(price.date);
+          return itemDate >= lastYear && itemDate <= currentDate;
+        });
+        if(date === 'week'){
+          const pricesArray = filteredDataLastWeek.map((price:any) => price.price )
+          const dateArray = filteredDataLastWeek.map((price:any) => price.date )
+          console.log('week ==>',pricesArray)
+          setChartDateRange('week')
+
+          setChartValues(pricesArray)
+          setChartLabels(dateArray)
+        } else if(date === 'month'){
+          const pricesArray = filteredDataLastMonth.map((price:any) => price.price )
+          const dateArray = filteredDataLastMonth.map((price:any) => price.date )
+          console.log('month ==>',pricesArray)
+          setChartValues(pricesArray)
+          setChartLabels(dateArray)
+          setChartDateRange('month')
+
+        } else if(date === 'year'){
+          const pricesArray = filteredDataLastYear.map((price:any) => price.price )
+          const dateArray = filteredDataLastYear.map((price:any) => price.date )
+          console.log('year ==>',pricesArray)
+          setChartDateRange('year')
+
+          setChartValues(pricesArray)
+          setChartLabels(dateArray)
+        }else{
+          const pricesArray = priceArrayOfObject.map((price:any) => price.price )
+          const dateArray = priceArrayOfObject.map((price:any) => price.date )
+          setChartValues(pricesArray)
+          setChartLabels(dateArray)
+          setChartDateRange('all')
+        }
+        // console.log('filtered by last week ago ==>' , filteredDataLastWeek)
+        // console.log('filtered by last month ago ==>' , filteredDataLastMonth)
+        // console.log('filtered by last year ago ==>' , filteredDataLastYear)
+        console.log('date selected', date)
+
+        // console.log('pricesArray ++>' , pricesArray)
+        // // const dates = prices.map((price:any) => price.date)
+        // console.log('date ++>',dateArray)
+        // console.log('price ==>',prices)
+        // console.log('date ==>',dates)
+
+  }
   const loadingPlaceHolder = () => {
     return <>
       <Placeholder.Graph active height={350} width={450} />
@@ -295,15 +372,16 @@ const ApexChart: React.FC<MiniChartProps> = ({ chartData , prices }) => {
     <div className='chart-section'>
       <p className='chart-title'>Price History</p>
       <div className='chart-ctrls'>
-        <button className={`chart-btn ${chartDateRange == 'week' && 'active'}`} onClick={() => setChartDateRange('week')}>Last 7 Days</button>
-        <button className={`chart-btn ${chartDateRange == 'month' && 'active'}`} onClick={() => setChartDateRange('month')}>Last Month</button>
-        <button className={`chart-btn ${chartDateRange == 'year' && 'active'}`} onClick={() => setChartDateRange('year')}>Last Year</button>
+        <button className={`chart-btn ${chartDateRange == 'all' && 'active'}`} onClick={() => onSelectDate('all')}>All</button>
+        <button className={`chart-btn ${chartDateRange == 'week' && 'active'}`} onClick={() => onSelectDate('week')}>Last 7 Days</button>
+        <button className={`chart-btn ${chartDateRange == 'month' && 'active'}`} onClick={() => onSelectDate('month')}>Last Month</button>
+        <button className={`chart-btn ${chartDateRange == 'year' && 'active'}`} onClick={() => onSelectDate('year')}>Last Year</button>
       </div>
-      <div id="chart">
-        <ReactApexChart options={options} series={[{
+      {chartValues.length > 0 ?<div id="chart">
+         <ReactApexChart options={options} series={[{
                 name: "Desktops",
                 data: chartValues
-        }]} type="line" height={350} width={450} />
+        }]} type="line" height={350} width={450} /> 
         {/* {dataState == "L" ? loadingPlaceHolder() : dataState == "N" ? noDataPlaceHolder() :
         } */}
         {/* <table className="table">
@@ -323,7 +401,7 @@ const ApexChart: React.FC<MiniChartProps> = ({ chartData , prices }) => {
           ))}
           </tbody>
         </table> */}
-      </div>
+      </div>: 'No data' }
     </div>
   );
 };
