@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import Header from '../components/Header';
 import { Interest, NLPChart, Post } from 'utils/types';
-import { Button, Container, Modal, Table  } from 'rsuite';
+import { Button, Container, List, Modal, Table  } from 'rsuite';
 import { useLocation, useNavigate, useParams } from 'react-router-dom';
 import { Col, Row } from 'react-bootstrap';
 import FacebookInterestCard from '../components/FacebookInterestCard';
@@ -29,6 +29,7 @@ const SocialPage: React.FC = () => {
     const navigate = useNavigate()
     const location = useLocation();
     const params = useParams();
+    const [modalData, setModalData] = React.useState<any[]>([]);
 
     const [name, setName] = useState('')
     const [details, setDetails] = useState<Details>()
@@ -58,6 +59,10 @@ const SocialPage: React.FC = () => {
     //     refetch();
     //     handleOpen();
     // }
+    function handleClose(){
+        setModalData([]);
+    } 
+
     async function getDetails(name:string){
         await axios.get(`https://dropshipping-app-ingsl.ondigitalocean.app/facebook/page_details/?page_name=${name}`).then((data) => {
             console.log('data ==>',data.data)
@@ -173,7 +178,10 @@ const SocialPage: React.FC = () => {
                             height={400}
                             headerHeight={54}
                             data={pages}
-                            
+                            onRowClick={(comments:any) => {
+                                setModalData(comments.Comments || [])
+                                console.log('click', comments.Comments)
+                            }}
                         >
                             <Column verticalAlign="middle" flexGrow={2} minWidth={300}>
                                 <HeaderCell>Page content</HeaderCell>
@@ -198,6 +206,21 @@ const SocialPage: React.FC = () => {
 
                 </Row>
             </Container>
+            <Modal overflow={true} open={modalData.length > 0} onClose={handleClose}>
+                <Modal.Header>
+                    <Modal.Title>Comments</Modal.Title>
+                </Modal.Header>
+                <Modal.Body>
+                    <List bordered>
+                        {modalData.length > 0 && modalData.map((comment, index) => (
+                            <List.Item key={index}>
+                                <p>{comment.Content}</p>
+                                <p className='date'>Posted from: {comment.Date}</p>
+                            </List.Item>
+                        ))}
+                    </List>
+                </Modal.Body>
+            </Modal>
         </>
     );
 };

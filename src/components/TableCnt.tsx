@@ -38,6 +38,7 @@ const TableCnt: React.FC<TableCntProp> = ({ data, isLoading } = { data: [], isLo
                 data={data}
                 onRowClick={rowData => {
                     setModalData(rowData.Comments || [])
+                    console.log('comments', rowData.Comments)
                 }}
             >
                 <Column verticalAlign="middle" flexGrow={2} minWidth={300}>

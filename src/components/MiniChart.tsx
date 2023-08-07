@@ -378,13 +378,13 @@ const ApexChart: React.FC<MiniChartProps> = ({ chartData , prices }) => {
         <button className={`chart-btn ${chartDateRange == 'year' && 'active'}`} onClick={() => onSelectDate('year')}>Last Year</button>
       </div>
       {chartValues.length > 0 ?<div id="chart">
-         <ReactApexChart options={options} series={[{
+         {/* <ReactApexChart options={options} series={[{
                 name: "Desktops",
                 data: chartValues
-        }]} type="line" height={350} width={450} /> 
+        }]} type="line" height={350} width={450} />  */}
         {/* {dataState == "L" ? loadingPlaceHolder() : dataState == "N" ? noDataPlaceHolder() :
         } */}
-        {/* <table className="table">
+        <table className="table">
           <thead>
             <tr>
               <th>Date</th>
@@ -400,7 +400,7 @@ const ApexChart: React.FC<MiniChartProps> = ({ chartData , prices }) => {
             </tr>
           ))}
           </tbody>
-        </table> */}
+        </table>
       </div>: 'No data' }
     </div>
   );

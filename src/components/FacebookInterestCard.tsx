@@ -74,9 +74,9 @@ const FacebookInterestCard: React.FC<FacebookInterestCard> = ({
         <div className="card-header">
           <div className="number">{content}</div>
           <div className="card-left">
-            {/* <Button style={{ display: 'flex', gap: "8px" }} onClick={handleOpen} size="sm" className='filter-btn' color='violet' appearance="primary">
+            <Button style={{ display: 'flex', gap: "8px" }} onClick={handleOpen} size="sm" className='filter-btn' color='violet' appearance="primary">
               <AiOutlineUnorderedList /> List
-            </Button> */}
+            </Button>
             <div className="icon">
               <Icon />
             </div>
